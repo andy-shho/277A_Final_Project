@@ -151,7 +151,7 @@ class Leiden_clustering:
         My_G.add_nodes_from(y_data)
         My_G.add_edges_from(edges)
 
-        G = ig.Graph(edges = edges, directed = False)
+        G = ig.Graph(n=len(x_data), edges = edges, directed = False)
         self.G = G.simplify()
 
         pos = nx.spectral_layout(My_G)
@@ -165,14 +165,21 @@ class Leiden_clustering:
 
     def get_UMAP(self):
         X_UMAP = umap.UMAP().fit_transform(self.x_data)
+        labels = [self.y_data, self.labels]
+        titles = ['True labels', 'Predicted labels']
 
-        for i in range(np.max(self.labels)+ 1):
-            idx = np.argwhere(self.labels == i)
-            plt.scatter(X_UMAP[idx, 0], X_UMAP[idx, 1], marker = '.', alpha = 0.3, label = str(i))
+        fig, ax = plt.subplots(1, 2, figsize=(10, 4))
 
-        plt.gca().set_aspect('equal', 'datalim')
-        plt.title("Leiden Clustering on Digits Dataset (UMAP)", fontsize = 12)
-        plt.legend()
+        for plt_i in range(2):
+            for i in range(np.max(labels[plt_i])+ 1):
+                idx = np.argwhere(labels[plt_i] == i)
+                ax[plt_i].scatter(X_UMAP[idx, 0], X_UMAP[idx, 1], marker = '.', alpha = 0.3, label = str(i))
+
+            ax[plt_i].set_aspect('equal', 'datalim')
+            ax[plt_i].set_title(titles[plt_i])
+            ax[plt_i].legend()
+        
+        plt.tight_layout
         plt.show()
 
         return
