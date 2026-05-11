@@ -25,40 +25,9 @@ import igraph as ig
 import umap.umap_ as umap
 
 # -------------------------- Cluster qualification methods ------------------------
-# def parent_get_entropy(trueLabels, pred_label_probabilities, num_components):
-#     '''
-#     Given a model which uses probabilities to assign classes, calculate prediction certainty with entropy
-#     How true labels are distributed within a predicted class
-#     '''
-#     cluster_entropies = {}
-#     cluster_entropies['MAX ENTROPY'] = float(np.log2(num_components)) # define max entropy for comparison
-
-#     pred_num_clusters = pred_label_probabilities.shape[1] # get length of matrix of probabilities
-#     # for each predicted class aka col
-#     for col in range(pred_num_clusters):
-
-#         # get probabilities for single class across all samples
-#         single_cluster_probabilities = pred_label_probabilities[:, col]
-
-#         # store probability per true label
-#         target_probabilities = []
-
-#         # for each true class label
-#         for true_class_label in np.unique(trueLabels):
-#             # mask to find samples where true == pred
-#             pred_mask = (trueLabels == true_class_label)
-
-#             # sum of predicted probabilities for class
-#             total_single_clust_probs = np.sum(single_cluster_probabilities[pred_mask]) # sum of predicted probabilities for target variable
-#             target_probabilities.append(total_single_clust_probs) 
-
-#         target_probabilities = np.array(target_probabilities) # convert list to numpy array for calculation
-#         cluster_probabilities = target_probabilities / target_probabilities.sum()
-
-#         cluster_entropy = float(-np.sum(cluster_probabilities * np.log2(cluster_probabilities)))
-#         cluster_entropies[col] = f'{cluster_entropy:.2f}'
-        
-#     return cluster_entropies
+def parent_get_entropy():
+    # !! TO DO !!
+    return 
 
 def TSNE_visualization(x_data, trueLabels, predLabels):
     le1 = LabelEncoder()
